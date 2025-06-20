@@ -8,24 +8,22 @@
 </head>
     <script>
   window.onload = function () {
-  // Primeiro, pega o IP público usando a API externa
-  fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-      const ip = data.ip; // IP do visitante
-      const userAgent = navigator.userAgent; // Navegador + sistema
-      const date = new Date().toLocaleString(); // Data e hora local
+    // Primeiro, pega o IP público usando a API externa
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip; // IP do visitante
+        const userAgent = navigator.userAgent; // Navegador + sistema
+        const date = new Date().toLocaleString(); // Data e hora local
 
-      const mensagem = `Entrou no site em ${date}. IP: ${ip}. Navegador: ${userAgent}`;
+        const mensagem = `Entrou no site em ${date}. IP: ${ip}. Navegador: ${userAgent}`;
 
-      // Manda pro Google Apps Script
-      return fetch(`https://script.google.com/macros/s/AKfycbw7NEB1T6C_bZj0hOlcDgbYgxkI2SBCCkCTnRRIGCY/dev/exec?message=${encodeURIComponent(mensagem)}`);
-    })
-    .then(res => res.text())
-    .then(data => console.log("Log enviado:", data))
-    .catch(err => console.error("Erro no log:", err));
-};
-
+        // Manda pro Google Apps Script
+        return fetch(`https://script.google.com/macros/s/AKfycbw7NEB1T6C_bZj0hOlcDgbYgxkI2SBCCkCTnRRIGCY/dev/exec?message=${encodeURIComponent(mensagem)}`);
+      })
+      .then(res => res.text())
+      .then(data => console.log("Log enviado:", data))
+      .catch(err => console.error("Erro no log:", err));
   };
 </script>
 
