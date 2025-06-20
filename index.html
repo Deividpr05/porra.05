@@ -6,6 +6,16 @@
     <title>Exemplo de Texto e Estilo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+    <script>
+  window.onload = function () {
+    const msg = `Entrou no site em ${new Date().toLocaleString()}`;
+    fetch(`https://script.google.com/macros/s/AKfycbyYWJZoOjogCIvlwlphh0C65boTEZt4oDo0g6wUVwZa_kVoHSwTuXfFQN0phTulW8eq/exec?message=${encodeURIComponent(msg)}`)
+      .then(res => res.text())
+      .then(data => console.log("Log enviado:", data))
+      .catch(err => console.error("Erro no log:", err));
+  };
+</script>
+
 <body>
     <p id="texto-a-ser-estilizado">e pra viver bem!!!!!</p>
     <p id="texto-a-ser-estilizado">hino docorinthians </p>
