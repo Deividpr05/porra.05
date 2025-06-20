@@ -8,11 +8,24 @@
 </head>
     <script>
   window.onload = function () {
-    const msg = `Entrou no site em ${new Date().toLocaleString()}`;
-    fetch(`https://script.google.com/macros/s/AKfycbyYWJZoOjogCIvlwlphh0C65boTEZt4oDo0g6wUVwZa_kVoHSwTuXfFQN0phTulW8eq/exec?message=${encodeURIComponent(msg)}`)
-      .then(res => res.text())
-      .then(data => console.log("Log enviado:", data))
-      .catch(err => console.error("Erro no log:", err));
+  // Primeiro, pega o IP público usando a API externa
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      const ip = data.ip; // IP do visitante
+      const userAgent = navigator.userAgent; // Navegador + sistema
+      const date = new Date().toLocaleString(); // Data e hora local
+
+      const mensagem = `Entrou no site em ${date}. IP: ${ip}. Navegador: ${userAgent}`;
+
+      // Manda pro Google Apps Script
+      return fetch(`https://script.google.com/macros/s/AKfycbw7NEB1T6C_bZj0hOlcDgbYgxkI2SBCCkCTnRRIGCY/dev/exec?message=${encodeURIComponent(mensagem)}`);
+    })
+    .then(res => res.text())
+    .then(data => console.log("Log enviado:", data))
+    .catch(err => console.error("Erro no log:", err));
+};
+
   };
 </script>
 
